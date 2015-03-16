@@ -83,6 +83,7 @@ public class MainActivity extends ActionBarActivity {
     private View.OnClickListener btnEOnClick=new View.OnClickListener(){
         @Override
         public void onClick(View v){
+            int error_zero=0;
             if(state==0 && inputString1!=""){
                 number1=Integer.parseInt(inputString1);
                 outputString=Integer.toString(number1);
@@ -103,7 +104,11 @@ public class MainActivity extends ActionBarActivity {
                         break;
                     }
                     case 4:{
-                        numberOutput=number1/number2;
+                        if(number2==0){
+                            error_zero=1;
+                        }else {
+                            numberOutput = number1 / number2;
+                        }
                         break;
                     }
                     default:{
@@ -111,7 +116,12 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
                 outputString=Integer.toString(numberOutput);
-                edtAnswer.setText(outputString);
+                if(error_zero==0){
+                    edtAnswer.setText(outputString);
+                }else{
+                    edtAnswer.setText("Error: Divisor mustn't be 0.");
+                }
+
                 number1=0;
                 number2=0;
                 numberOutput=0;
